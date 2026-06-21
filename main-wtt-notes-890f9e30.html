@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wtt · 主题内容平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f5f6f8;
+            color: #1e1f24;
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-wrap {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 24px;
+            flex: 1;
+        }
+
+        /* ---- 深色头图 ---- */
+        .hero {
+            background: linear-gradient(135deg, #0b0d15 0%, #1b1f2b 100%);
+            color: #eaeef2;
+            padding: 72px 32px 56px;
+            border-radius: 0 0 48px 48px;
+            margin-bottom: 48px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #b7c9e2;
+            font-weight: 400;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            max-width: 720px;
+            margin: 0 auto;
+            color: #c9d4e2;
+            line-height: 1.8;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 8px 28px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 40px;
+            font-size: 0.95rem;
+            color: #d7dfea;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        /* ---- 网格卡片区 ---- */
+        .section-title {
+            font-size: 1.65rem;
+            font-weight: 500;
+            margin-bottom: 28px;
+            color: #1b1f2b;
+            border-left: 5px solid #3b5f8a;
+            padding-left: 18px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            margin-bottom: 52px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 32px 28px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e9ecf0;
+            transition: box-shadow 0.2s, transform 0.15s;
+        }
+
+        .card:hover {
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 14px;
+            color: #1f2937;
+        }
+
+        .card p {
+            color: #3e4552;
+            font-size: 0.98rem;
+        }
+
+        .card .icon-line {
+            display: inline-block;
+            width: 32px;
+            height: 3px;
+            background: #3b5f8a;
+            margin-bottom: 18px;
+            border-radius: 4px;
+        }
+
+        .highlight-link {
+            color: #1e4b6e;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.15s, color 0.15s;
+        }
+
+        .highlight-link:hover {
+            color: #0a2e44;
+            border-bottom-color: #3b5f8a;
+        }
+
+        .inline-link-text {
+            color: #1e4b6e;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dashed #b0c6db;
+            padding-bottom: 1px;
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        .inline-link-text:hover {
+            color: #0a2e44;
+            border-bottom-color: #1e4b6e;
+        }
+
+        /* ---- 使用建议 / 场景 ---- */
+        .scenario-block {
+            background: #ffffff;
+            border-radius: 32px;
+            padding: 36px 32px;
+            margin-bottom: 48px;
+            border: 1px solid #e4e8ee;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px 40px;
+        }
+
+        .scenario-block > div {
+            flex: 1 1 200px;
+        }
+
+        .scenario-block h4 {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #1b1f2b;
+            margin-bottom: 12px;
+        }
+
+        .scenario-block p {
+            color: #3d4555;
+            font-size: 0.95rem;
+        }
+
+        .scenario-block .badge {
+            display: inline-block;
+            background: #eef2f7;
+            padding: 2px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #2b4055;
+            margin-top: 8px;
+        }
+
+        /* ---- 提示 / 可信说明 ---- */
+        .notice-area {
+            background: #eef2f8;
+            border-radius: 32px;
+            padding: 28px 32px;
+            margin-bottom: 48px;
+            border-left: 6px solid #3b5f8a;
+        }
+
+        .notice-area p {
+            color: #293240;
+            font-size: 0.98rem;
+            margin-bottom: 6px;
+        }
+
+        .notice-area p:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-mini {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px 32px;
+            margin-bottom: 48px;
+        }
+
+        .faq-mini .item {
+            background: #ffffff;
+            padding: 20px 24px;
+            border-radius: 20px;
+            border: 1px solid #e8ecf2;
+        }
+
+        .faq-mini .item strong {
+            display: block;
+            font-weight: 500;
+            color: #1b1f2b;
+            margin-bottom: 8px;
+        }
+
+        .faq-mini .item p {
+            color: #3d4555;
+            font-size: 0.94rem;
+        }
+
+        /* ---- 页脚 ---- */
+        .footer-note {
+            border-top: 1px solid #dce1e8;
+            padding: 28px 0 36px;
+            margin-top: 16px;
+            text-align: center;
+            font-size: 0.88rem;
+            color: #5e6877;
+        }
+
+        .footer-note a {
+            color: #1e4b6e;
+            text-decoration: none;
+        }
+
+        .footer-note a:hover {
+            text-decoration: underline;
+        }
+
+        /* ---- 响应式 ---- */
+        @media (max-width: 820px) {
+            .hero {
+                padding: 52px 20px 40px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .faq-mini {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .scenario-block {
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+
+            .notice-area {
+                padding: 20px 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-wrap {
+                padding: 0 16px;
+            }
+
+            .hero {
+                padding: 40px 16px 32px;
+                border-radius: 0 0 28px 28px;
+            }
+
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+
+            .card {
+                padding: 24px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+    <!-- 深色头图 -->
+    <header class="hero">
+        <h1>围绕主题内容 · <span>wtt</span></h1>
+        <p>一个注重内容本身与阅读节奏的站点，<br>没有浮夸的推送，只有经过梳理的信息与观点。</p>
+        <div class="tagline">内容结构 · 可读性 · 克制的呈现</div>
+    </header>
+
+    <!-- 摘要 + 亮点（卡片网格） -->
+    <h2 class="section-title">摘要与思路</h2>
+    <div class="grid-2">
+        <div class="card">
+            <div class="icon-line"></div>
+            <h3>从关键词出发</h3>
+            <p>每一个主题都围绕一个关键词展开——正如 <a href="https://main-wtt.com" class="inline-link-text">wtt</a> 所坚持的，不堆砌无关信息，让内容保持清晰的主线与纵深感。</p>
+        </div>
+        <div class="card">
+            <div class="icon-line"></div>
+            <h3>去噪音化设计</h3>
+            <p>没有弹窗、无限滚动、自动播放。页面以文字信息为核心，排版留白充足，希望你可以在阅读中获得片刻专注。</p>
+        </div>
+        <div class="card">
+            <div class="icon-line"></div>
+            <h3>场景化内容</h3>
+            <p>从工具使用到知识梳理，每个板块都匹配实际需求。无论是学习笔记、还是产品思路，内容都经过一定提炼。</p>
+        </div>
+        <div class="card">
+            <div class="icon-line"></div>
+            <h3>克制的交互</h3>
+            <p>链接与按钮仅出现在必要位置，不干扰阅读主线。一切功能都服务于“让信息更易理解”这个初衷。</p>
+        </div>
+    </div>
+
+    <!-- 使用建议 / 场景 -->
+    <h2 class="section-title">使用建议</h2>
+    <div class="scenario-block">
+        <div>
+            <h4>浏览与检索</h4>
+            <p>你可以利用站内分类或关键词索引，快速定位自己关心的内容板块。每个页面都保持相对独立，不必从头读到尾。</p>
+            <span class="badge">按需阅读</span>
+        </div>
+        <div>
+            <h4>主题参考</h4>
+            <p>如果你正在寻找某个概念或产品的平实介绍，<a href="https://main-wtt.com" class="inline-link-text">wtt</a> 中的内容可以作为一个切入点，帮助你建立框架。</p>
+            <span class="badge">信息溯源</span>
+        </div>
+        <div>
+            <h4>深度探索</h4>
+            <p>部分页面会附上延伸阅读或相关链接，你可以根据兴趣继续深入。不强制跳转，也不夸大引导。</p>
+            <span class="badge">自主选择</span>
+        </div>
+    </div>
+
+    <!-- 可信但克制的访问说明 -->
+    <div class="notice-area">
+        <p><strong>关于访问与可信度</strong> —— 本平台以信息整理与个人见解为主，不构成专业意见或投资建议。所有内容均来自公开资料与独立梳理，引用时会尽量标注来源。你可以自由浏览，但请结合自身判断使用。</p>
+        <p style="margin-top: 10px;">平台不会收集用户浏览行为，也没有第三方追踪脚本。每一次访问都是安静的。</p>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <h2 class="section-title">常见想法 · 简答</h2>
+    <div class="faq-mini">
+        <div class="item">
+            <strong>内容更新频率如何？</strong>
+            <p>不追求日更，所有内容以完整、有参考价值为前提。你看到的每一页都经过审阅与调整。</p>
+        </div>
+        <div class="item">
+            <strong>是否需要注册或登录？</strong>
+            <p>完全不需要。所有页面公开可见，无需创建账户，也不存在付费墙。</p>
+        </div>
+        <div class="item">
+            <strong>可以转载或引用吗？</strong>
+            <p>非商业用途引用请注明出处。如需转载至出版物或商业平台，建议先联系确认。</p>
+        </div>
+        <div class="item">
+            <strong>为什么叫 wtt ？</strong>
+            <p>只是三个字母的组合，代表一种简洁的标识，没有复杂的含义。重点始终是内容本身。</p>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer-note">
+        <p>了解更多，可以前往 <a href="https://main-wtt.com" class="highlight-link">wtt</a> · 内容持续完善中</p>
+    </div>
+</div>
+</body>
+</html>
